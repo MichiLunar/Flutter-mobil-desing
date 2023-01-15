@@ -1,6 +1,6 @@
 import 'package:desing_fonts/src/retos/cuadrado_animado_page.dart';
 import 'package:flutter/material.dart';
-import 'package:desing_fonts/src/pages/pages.dart';
+//import 'package:desing_fonts/src/pages/pages.dart';
 
 void main() => runApp(const MyApp());
 

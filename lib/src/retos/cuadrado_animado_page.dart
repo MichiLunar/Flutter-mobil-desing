@@ -21,13 +21,46 @@ class _CuadradoAnimado extends StatefulWidget {
   State<_CuadradoAnimado> createState() => _CuadradoAnimadoState();
 }
 
-class _CuadradoAnimadoState extends State<_CuadradoAnimado> {
+class _CuadradoAnimadoState extends State<_CuadradoAnimado>
+    with SingleTickerProviderStateMixin {
   late AnimationController controller;
   // animaciones
+  late Animation<double> moverDerecha;
+  late Animation<double> moverArriba;
+  late Animation<double> moverIzquierda;
+  late Animation<double> moverAbajo;
 
   @override
   void initState() {
-    // TODO: implement initState
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 4500));
+
+    moverDerecha = Tween(begin: 0.0, end: 100.0).animate(
+      CurvedAnimation(
+          parent: controller,
+          curve: const Interval(0.0, 0.25, curve: Curves.bounceOut)),
+    );
+    moverArriba = Tween(begin: 0.0, end: -100.0).animate(
+      CurvedAnimation(
+          parent: controller,
+          curve: const Interval(0.25, 0.50, curve: Curves.bounceOut)),
+    );
+    moverIzquierda = Tween(begin: 0.0, end: -100.0).animate(
+      CurvedAnimation(
+          parent: controller,
+          curve: const Interval(0.5, 0.75, curve: Curves.bounceOut)),
+    );
+    moverAbajo = Tween(begin: 0.0, end: 100.0).animate(
+      CurvedAnimation(
+          parent: controller,
+          curve: const Interval(0.75, 1.0, curve: Curves.bounceOut)),
+    );
+
+    controller.addListener(() {
+      if (controller.status == AnimationStatus.completed) {
+        controller.repeat();
+      }
+    });
     super.initState();
   }
 
@@ -39,7 +72,18 @@ class _CuadradoAnimadoState extends State<_CuadradoAnimado> {
 
   @override
   Widget build(BuildContext context) {
-    return _Rectangulo();
+    controller.forward();
+    return AnimatedBuilder(
+      animation: controller,
+      child: _Rectangulo(),
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(moverDerecha.value + moverIzquierda.value,
+              moverArriba.value + moverAbajo.value),
+          child: child,
+        );
+      },
+    );
   }
 }
 
