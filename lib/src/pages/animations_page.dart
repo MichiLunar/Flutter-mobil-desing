@@ -30,7 +30,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   void initState() {
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 4000));
-    rotacion = Tween(begin: 0.0, end: 2.0).animate(controller);
+    rotacion = Tween(begin: 0.0, end: 4.0).animate(controller);
     super.initState();
   }
 
@@ -42,7 +42,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
 
   @override
   Widget build(BuildContext context) {
-    return _Rectangulo();
+    // Play / Reproduccion
+    controller.forward();
+    return AnimatedBuilder(
+      animation: controller,
+      child: const _Rectangulo(),
+      builder: (BuildContext context, Widget? child) {
+        return Transform.rotate(angle: rotacion.value, child: child);
+      },
+    );
   }
 }
 
