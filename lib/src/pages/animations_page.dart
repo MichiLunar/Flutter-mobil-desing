@@ -31,12 +31,14 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   void initState() {
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 4000));
-    rotacion = Tween(begin: 0.0, end: 4 * Math.pi).animate(controller);
+    rotacion = Tween(begin: 0.0, end: 4 * Math.pi)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
     controller.addListener(() {
       print('Status: ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
-        controller.reverse();
+        //controller.reverse();
+        controller.reset();
       }
     });
     super.initState();
