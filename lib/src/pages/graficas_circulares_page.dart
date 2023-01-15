@@ -13,31 +13,64 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        onPressed: () {
-          setState(() {
-            porcentaje += 10.0;
-            if (porcentaje > 100) {
-              porcentaje = 0.0;
-            }
-          });
-        },
-        child: const Icon(Icons.refresh_outlined),
-      ),
-      body: Center(
-        child: Container(
-          width: 200,
-          height: 200,
-          child: RadialProgress(
-            porcentaje: porcentaje,
-            colorPrimario: Colors.black,
-            colorSecundario: Colors.grey,
-            grosorPrimario: 10,
-            grosorSecundario: 10,
-          ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green,
+          onPressed: () {
+            setState(() {
+              porcentaje += 10.0;
+              if (porcentaje > 100) {
+                porcentaje = 0.0;
+              }
+            });
+          },
+          child: const Icon(Icons.refresh_outlined),
         ),
-        //Text('$porcentaje %',style: const TextStyle(fontSize: 50),),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                CustomRadialProgress(
+                    porcentaje: porcentaje, color: Colors.blue),
+                CustomRadialProgress(porcentaje: porcentaje, color: Colors.red),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                CustomRadialProgress(
+                    porcentaje: porcentaje, color: Colors.purple),
+                CustomRadialProgress(
+                    porcentaje: porcentaje, color: Colors.indigo),
+              ],
+            )
+          ],
+        ));
+  }
+}
+
+class CustomRadialProgress extends StatelessWidget {
+  final Color color;
+  const CustomRadialProgress({
+    Key? key,
+    required this.porcentaje,
+    required this.color,
+  }) : super(key: key);
+
+  final double porcentaje;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 180,
+      height: 180,
+      child: RadialProgress(
+        porcentaje: porcentaje,
+        colorPrimario: color,
+        colorSecundario: Colors.grey,
+        grosorPrimario: 10,
+        grosorSecundario: 10,
       ),
     );
   }
