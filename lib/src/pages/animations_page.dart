@@ -28,6 +28,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   late Animation<double> rotacion;
   late Animation<double> opacidad;
   late Animation<double> moverDerecha;
+  late Animation<double> agrandar;
 
   @override
   void initState() {
@@ -47,10 +48,14 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       CurvedAnimation(parent: controller, curve: Curves.easeOut),
     );
 
+    agrandar = Tween(begin: 0.0, end: 2.0).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeOut),
+    );
+
     controller.addListener(() {
       print('Status: ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
-        controller.reverse();
+        controller.repeat();
         //controller.reset();
       }
     });
@@ -77,7 +82,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
             angle: rotacion.value,
             child: Opacity(
               opacity: opacidad.value,
-              child: childRectangulo,
+              child: Transform.scale(
+                scale: agrandar.value,
+                child: childRectangulo,
+              ),
             ),
           ),
         );
