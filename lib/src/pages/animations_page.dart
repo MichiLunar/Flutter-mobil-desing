@@ -53,7 +53,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     );
 
     controller.addListener(() {
-      print('Status: ${controller.status}');
+      //print('Status: ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
         controller.repeat();
         //controller.reset();
