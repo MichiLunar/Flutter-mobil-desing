@@ -1,3 +1,4 @@
+import 'package:desing_fonts/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class GraficasCircularesPage extends StatefulWidget {
@@ -16,19 +17,22 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
         backgroundColor: Colors.green,
         onPressed: () {
           setState(() {
-            porcentaje += 10;
+            porcentaje += 10.0;
             if (porcentaje > 100) {
-              porcentaje = 0;
+              porcentaje = 0.0;
             }
           });
         },
         child: const Icon(Icons.refresh_outlined),
       ),
       body: Center(
-        child: Text(
-          '$porcentaje %',
-          style: const TextStyle(fontSize: 50),
+        child: Container(
+          width: 300,
+          height: 300,
+          color: Colors.indigo,
+          child: RadialProgress(porcentaje: porcentaje),
         ),
+        //Text('$porcentaje %',style: const TextStyle(fontSize: 50),),
       ),
     );
   }

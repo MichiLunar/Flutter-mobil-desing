@@ -1,3 +1,5 @@
+export 'package:desing_fonts/src/widgets/radial_progress.dart';
+
 export 'package:desing_fonts/src/widgets/headers_waves_invertido.dart';
 export 'package:desing_fonts/src/widgets/headers_waves.dart';
 export 'package:desing_fonts/src/widgets/headers_curvo.dart';
