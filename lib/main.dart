@@ -1,6 +1,6 @@
-import 'package:desing_fonts/src/retos/cuadrado_animado_page.dart';
+//import 'package:desing_fonts/src/retos/cuadrado_animado_page.dart';
 import 'package:flutter/material.dart';
-//import 'package:desing_fonts/src/pages/pages.dart';
+import 'package:desing_fonts/src/pages/pages.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: CuadradoAnimadoPage(),
+      home: CircularProgressPage(),
     );
   }
 }
